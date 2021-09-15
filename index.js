@@ -3,8 +3,16 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const express = require("express");
+const cors = require("cors");
+
+const corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
+};
+
 const app = express();
 app.use(express.json());
+app.use(cors(corsOptions))
 
 const Conn = require("./models/conn/conn");
 
@@ -18,6 +26,6 @@ Conn(
 const taskRoutes = require("./routers/tasks.routes");
 app.use("/tasks", taskRoutes);
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3001, () => {
   console.info("Servidor rodando...");
 });

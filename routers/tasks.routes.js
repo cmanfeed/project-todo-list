@@ -8,47 +8,47 @@ router.get("/", async (req, res) => {
       res.status(200).send(tasks);
     })
     .catch(() => {
-      res.status(400).send("Server error.");
+      res.status(501).send({ response:"Server error."});
     });
 });
 
-router.get("/:id", async (req, res) => {
-  await Task.find({ _id: req.params.id })
+router.get("/findid/:id", async (req, res) => {
+  await Task.findOne({ _id: req.params.id })
     .then((tasks) => {
       res.status(200).send(tasks);
     })
     .catch(() => {
-      res.status(404).send("Could not find the specific ID.");
+      res.status(404).send({ response:"Could not find the specific ID."});
     });
 });
 
 router.post("/", async (req, res) => {
   await Task.create(req.body)
     .then(() => {
-      res.status(201).send("Task add sucessfully.");
+      res.status(201).send({ response: "Task add sucessfully." });
     })
     .catch(() => {
-      res.status(400).send("Maybe you're missing some arguments in body.");
+      res.status(400).send({ response:"Maybe you're missing some arguments in body."});
     });
 });
 
 router.put("/:id", async (req, res) => {
   await Task.updateOne({ _id: req.params.id }, req.body)
     .then(() => {
-      res.status(200).send("successfully Updated.");
+      res.status(200).send({ response:"Successfully Updated."});
     })
     .catch(() => {
-      res.status(404).send("Could not find the specific ID.");
+      res.status(404).send({ response:"Could not find the specific ID."});
     });
 });
 
 router.delete("/:id", async (req, res) => {
   await Task.deleteOne({ _id: req.params.id })
     .then(() => {
-      res.status(200).send("Successfully Deleted.");
+      res.status(200).send({ response:"Successfully Deleted."});
     })
     .catch(() => {
-      res.status(404).send("Could not find the specific ID.");
+      res.status(404).send({ response:"Could not find the specific ID."});
     });
 });
 
