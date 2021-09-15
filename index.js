@@ -6,13 +6,13 @@ const express = require("express");
 const cors = require("cors");
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://project-todo-list-front-heroku.herokuapp.com/",
   optionsSuccessStatus: 200,
 };
 
 const app = express();
 app.use(express.json());
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 
 const Conn = require("./models/conn/conn");
 
